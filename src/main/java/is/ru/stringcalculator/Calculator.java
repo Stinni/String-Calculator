@@ -6,24 +6,8 @@ public class Calculator {
 		if(text.equals("")) {
 			return 0;
 		}
-		else if(text.contains(",") && text.contains("\n")) {
+		else if(text.contains(",") || text.contains("\n")) {
 			String [] numbers = text.split(",|\n");
-			int x = 0;
-			for(String s : numbers) {
-				x += toInt(s);
-			}
-			return x;
-		}
-		else if(text.contains(",")) {
-			String [] numbers = text.split(",");
-			int x = 0;
-			for(String s : numbers) {
-				x += toInt(s);
-			}
-			return x;
-		}
-		else if(text.contains("\n")) {
-			String [] numbers = text.split("\n");
 			int x = 0;
 			for(String s : numbers) {
 				x += toInt(s);
