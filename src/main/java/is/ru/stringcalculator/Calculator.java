@@ -9,24 +9,24 @@ public class Calculator {
 		else if(text.startsWith("//")) {
 			String delimiter = text.substring(2, 3);
 			String justNumbers = text.substring(text.indexOf("\n")+1, text.length());
-			String [] numbers = justNumbers.split(delimiter);
-			int sum = 0;
-			for(String s : numbers) {
-				sum += toInt(s);
-			}
-			return sum;
+			String [] theNumbers = justNumbers.split(delimiter);
+			return sumOfArray(theNumbers);
 		}
 		else if(text.contains(",") || text.contains("\n")) {
 			String [] numbers = text.split(",|\n");
-			int sum = 0;
-			for(String s : numbers) {
-				sum += toInt(s);
-			}
-			return sum;
+			return sumOfArray(numbers);
 		}
 		else {
 			return toInt(text);
 		}
+	}
+
+	private static int sumOfArray(String [] numbers) {
+		int sum = 0;
+		for(String s : numbers) {
+			sum += toInt(s);
+		}
+		return sum;
 	}
 
 	private static int toInt(String number) {
