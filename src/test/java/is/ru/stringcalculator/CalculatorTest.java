@@ -59,4 +59,14 @@ public class CalculatorTest {
 	public void testIfExceptionIsThrownIfNegativeNumber() throws IllegalArgumentException {
 		Calculator.add("10,-1");
 	}
+
+	@Test
+	public void testOneNumberAbove1000() {
+		assertEquals(0, Calculator.add("1001"));
+	}
+
+	@Test
+	public void testMultipleNumbersAbove1000() {
+		assertEquals(120, Calculator.add("20000,1212,30\n4000,90"));
+	}
 }
