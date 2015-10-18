@@ -1,7 +1,8 @@
 package is.ru.stringcalculator;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class CalculatorTest {
 	
@@ -47,5 +48,10 @@ public class CalculatorTest {
 	@Test
 	public void testAddWithDoubleDotAsDelimiter() {
 		assertEquals(33, Calculator.add("//:\n22:11"));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testIfExceptionIsThrownIfNegativeNumber() throws IllegalArgumentException {
+		Calculator.add("10,-1");
 	}
 }

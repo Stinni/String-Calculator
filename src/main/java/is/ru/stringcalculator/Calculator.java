@@ -30,6 +30,10 @@ public class Calculator {
 	}
 
 	private static int toInt(String number) {
-		return Integer.parseInt(number);
+		int num = Integer.parseInt(number);
+		if(num < 0) {
+			throw new IllegalArgumentException();
+		}
+		return num;
 	}
 }
