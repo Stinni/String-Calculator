@@ -36,6 +36,7 @@ public class Calculator {
 			}
 		}
 		if(!negativeNumbers.isEmpty()) {
+			negativeNumbers = negativeNumbers.substring(0,negativeNumbers.length()-1);
 			throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers);
 		}
 	}
