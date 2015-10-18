@@ -13,4 +13,9 @@ public class CalculatorTest {
 	public void testEmptyString() {
 		assertEquals(0, Calculator.add(""));
 	}
+
+	@Test
+	public void testAddWithOneNumber() {
+		assertEquals(5, Calculator.add("5"));
+	}
 }
