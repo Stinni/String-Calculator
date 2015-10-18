@@ -41,23 +41,46 @@ public class CalculatorTest {
 	}
 
 	@Test
-	public void testAddWithSemiCommaAsDelimiter() {
+	public void testAddWithSemiColonAsDelimiter() {
 		assertEquals(32, Calculator.add("//;\n22;10"));
 	}
 
 	@Test
-	public void testAddWithDoubleDotAsDelimiter() {
+	public void testAddWithColonAsDelimiter() {
 		assertEquals(33, Calculator.add("//:\n22:11"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testIfExceptionIsThrownIfOnlyOneNegativeNumber() throws IllegalArgumentException {
-		Calculator.add("-50");
+		try {
+			Calculator.add("-50");
+		} catch (IllegalArgumentException e) {
+			String expectedMessage = "Negatives not allowed: -50";
+			assertEquals(expectedMessage, e.getMessage());
+			throw e;
+		}
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testIfExceptionIsThrownIfNegativeNumber() throws IllegalArgumentException {
-		Calculator.add("10,-1");
+		try {
+			Calculator.add("10,-1");
+		} catch (IllegalArgumentException e) {
+			String expectedMessage = "Negatives not allowed: -1";
+			assertEquals(expectedMessage, e.getMessage());
+			throw e;
+		}
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testIfExceptionIsThrownIfNegativeNumbers() throws IllegalArgumentException {
+		try {
+			Calculator.add("10,-1,-10,-5,50");
+		} catch (IllegalArgumentException e) {
+			String expectedMessage = "Negatives not allowed: -1,-10,-5";
+			assertEquals(expectedMessage, e.getMessage());
+			throw e;
+		}
 	}
 
 	@Test
@@ -69,4 +92,9 @@ public class CalculatorTest {
 	public void testMultipleNumbersAbove1000() {
 		assertEquals(120, Calculator.add("20000,1212,30\n4000,90"));
 	}
+
+	/*@Test
+	public void testAddWithLongerDelimiter1() {
+		assertEquals(34, Calculator.add("//[***]\n22***10***2"));
+	}*/
 }
