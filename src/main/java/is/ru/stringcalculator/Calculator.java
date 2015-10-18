@@ -8,7 +8,11 @@ public class Calculator {
 		}
 		else if(text.contains(",")) {
 			String [] numbers = text.split(",");
-			return toInt(numbers[0]) + toInt(numbers[1]);
+			int x = 0;
+			for(String s : numbers) {
+				x += toInt(s);
+			}
+			return x;
 		}
 		else {
 			return toInt(text);
