@@ -51,6 +51,11 @@ public class CalculatorTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	public void testIfExceptionIsThrownIfOnlyOneNegativeNumber() throws IllegalArgumentException {
+		Calculator.add("-50");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testIfExceptionIsThrownIfNegativeNumber() throws IllegalArgumentException {
 		Calculator.add("10,-1");
 	}

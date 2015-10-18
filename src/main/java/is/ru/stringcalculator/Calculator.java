@@ -10,14 +10,33 @@ public class Calculator {
 			String delimiter = text.substring(2, 3);
 			String justNumbers = text.substring(text.indexOf("\n")+1, text.length());
 			String [] theNumbers = justNumbers.split(delimiter);
+			checkInputForIllegalNumbers(theNumbers);
 			return sumOfArray(theNumbers);
 		}
 		else if(text.contains(",") || text.contains("\n")) {
 			String [] numbers = text.split(",|\n");
+			checkInputForIllegalNumbers(numbers);
 			return sumOfArray(numbers);
 		}
 		else {
-			return toInt(text);
+			int number = toInt(text);
+			if (number < 0) {
+				throw new IllegalArgumentException("Negatives not allowed: " + number);
+			}
+			return number;
+		}
+	}
+
+	private static void checkInputForIllegalNumbers(String [] numbers) {
+		String negativeNumbers = "";
+		for(String s : numbers) {
+			if(toInt(s) < 0) {
+				negativeNumbers += s;
+				negativeNumbers += ",";
+			}
+		}
+		if(!negativeNumbers.isEmpty()) {
+			throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers);
 		}
 	}
 
@@ -30,10 +49,6 @@ public class Calculator {
 	}
 
 	private static int toInt(String number) {
-		int num = Integer.parseInt(number);
-		if(num < 0) {
-			throw new IllegalArgumentException();
-		}
-		return num;
+		return Integer.parseInt(number);
 	}
 }
