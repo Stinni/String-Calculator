@@ -28,4 +28,9 @@ public class CalculatorTest {
 	public void testAddWithTwoMultipleNumbers() {
 		assertEquals(100, Calculator.add("20,10,12,8,6,14,9,11,5,5"));
 	}
+
+	@Test
+	public void testAddWithNumbersCommaAndNewLine() {
+		assertEquals(7, Calculator.add("2\n2,3"));
+	}
 }
