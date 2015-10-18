@@ -33,4 +33,9 @@ public class CalculatorTest {
 	public void testAddWithNumbersCommaAndNewLine() {
 		assertEquals(7, Calculator.add("2\n2,3"));
 	}
+
+	@Test
+	public void testAddWithNumbersAndNewLine() {
+		assertEquals(20, Calculator.add("2\n12\n6"));
+	}
 }
