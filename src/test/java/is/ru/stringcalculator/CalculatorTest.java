@@ -38,4 +38,14 @@ public class CalculatorTest {
 	public void testAddWithNumbersAndNewLine() {
 		assertEquals(20, Calculator.add("2\n12\n6"));
 	}
+
+	@Test
+	public void testAddWithSemiCommaAsDelimiter() {
+		assertEquals(32, Calculator.add("//;\n22;10"));
+	}
+
+	@Test
+	public void testAddWithDoubleDotAsDelimiter() {
+		assertEquals(33, Calculator.add("//:\n22:11"));
+	}
 }

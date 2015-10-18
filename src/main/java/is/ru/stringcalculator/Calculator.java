@@ -3,16 +3,26 @@ package is.ru.stringcalculator;
 public class Calculator {
 
 	public static int add(String text) {
-		if(text.equals("")) {
+		if(text.isEmpty()) {
 			return 0;
+		}
+		else if(text.startsWith("//")) {
+			String delimiter = text.substring(2, 3);
+			String justNumbers = text.substring(text.indexOf("\n")+1, text.length());
+			String [] numbers = justNumbers.split(delimiter);
+			int sum = 0;
+			for(String s : numbers) {
+				sum += toInt(s);
+			}
+			return sum;
 		}
 		else if(text.contains(",") || text.contains("\n")) {
 			String [] numbers = text.split(",|\n");
-			int x = 0;
+			int sum = 0;
 			for(String s : numbers) {
-				x += toInt(s);
+				sum += toInt(s);
 			}
-			return x;
+			return sum;
 		}
 		else {
 			return toInt(text);
