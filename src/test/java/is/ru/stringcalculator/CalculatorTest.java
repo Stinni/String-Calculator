@@ -21,32 +21,20 @@ public class CalculatorTest {
 	}
 
 	@Test
-	public void testAddWithTwoNumbers() {
+	public void testAddWithTwoOrMoreNumbers() {
 		assertEquals(20, Calculator.add("12,8"));
-	}
-
-	@Test
-	public void testAddWithTwoMultipleNumbers() {
 		assertEquals(100, Calculator.add("20,10,12,8,6,14,9,11,5,5"));
 	}
 
 	@Test
 	public void testAddWithNumbersCommaAndNewLine() {
 		assertEquals(7, Calculator.add("2\n2,3"));
-	}
-
-	@Test
-	public void testAddWithNumbersAndNewLine() {
 		assertEquals(20, Calculator.add("2\n12\n6"));
 	}
 
 	@Test
-	public void testAddWithSemiColonAsDelimiter() {
+	public void testAddWithOtherDelimiters() {
 		assertEquals(32, Calculator.add("//;\n22;10"));
-	}
-
-	@Test
-	public void testAddWithColonAsDelimiter() {
 		assertEquals(33, Calculator.add("//:\n22:11"));
 	}
 
@@ -84,17 +72,14 @@ public class CalculatorTest {
 	}
 
 	@Test
-	public void testOneNumberAbove1000() {
+	public void testNumbersAbove1000() {
 		assertEquals(0, Calculator.add("1001"));
-	}
-
-	@Test
-	public void testMultipleNumbersAbove1000() {
 		assertEquals(120, Calculator.add("20000,1212,30\n4000,90"));
 	}
 
 	@Test
 	public void testAddWithLongerDelimiter1() {
 		assertEquals(34, Calculator.add("//[***]\n22***10***2"));
+		assertEquals(34, Calculator.add("//[;;;;;]\n22;;;;;10;;;;;2"));
 	}
 }

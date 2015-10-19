@@ -7,10 +7,8 @@ import java.util.regex.Matcher;
 public class Calculator {
 
 	public static int add(String text) {
-		if(text.isEmpty()) {
-			return 0;
-		}
-		else if(text.startsWith("//")) {
+		int sum = 0;
+		if(!text.isEmpty()) {
 			String regexPattern = "-?\\d+";
 			Matcher m = Pattern.compile(regexPattern).matcher(text);
 			List<Integer> numbers = new LinkedList<Integer>();
@@ -19,24 +17,9 @@ public class Calculator {
 				numbers.add(number);
 			}
 			checkInputForIllegalNumbers(numbers);
-			return sumOfListOfIntegers(numbers);
+			sum = sumOfListOfIntegers(numbers);
 		}
-		else if(text.contains(",") || text.contains("\n")) {
-			String [] numbers = text.split(",|\n");
-			List<Integer> listOfNumbers = new LinkedList<Integer>();
-			for(String s : numbers) {
-				listOfNumbers.add(toInt(s));
-			}
-			checkInputForIllegalNumbers(listOfNumbers);
-			return sumOfListOfIntegers(listOfNumbers);
-		}
-		else {
-			int number = toInt(text);
-			if (number < 0) {
-				throw new IllegalArgumentException("Negatives not allowed: " + text);
-			}
-			return number;
-		}
+		return sum;
 	}
 
 	private static void checkInputForIllegalNumbers(List<Integer> numbers) {
