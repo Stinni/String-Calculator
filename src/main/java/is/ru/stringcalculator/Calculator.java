@@ -1,4 +1,8 @@
 package is.ru.stringcalculator;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class Calculator {
 
@@ -7,44 +11,52 @@ public class Calculator {
 			return 0;
 		}
 		else if(text.startsWith("//")) {
-			String delimiter = text.substring(2, 3);
-			String justNumbers = text.substring(text.indexOf("\n")+1, text.length());
-			String [] theNumbers = justNumbers.split(delimiter);
-			checkInputForIllegalNumbers(theNumbers);
-			return sumOfArray(theNumbers);
+			String regexPattern = "-?\\d+";
+			Matcher m = Pattern.compile(regexPattern).matcher(text);
+			List<Integer> numbers = new LinkedList<Integer>();
+			while(m.find()) {
+				int number = toInt(m.group());
+				numbers.add(number);
+			}
+			checkInputForIllegalNumbers(numbers);
+			return sumOfListOfIntegers(numbers);
 		}
 		else if(text.contains(",") || text.contains("\n")) {
 			String [] numbers = text.split(",|\n");
-			checkInputForIllegalNumbers(numbers);
-			return sumOfArray(numbers);
+			List<Integer> listOfNumbers = new LinkedList<Integer>();
+			for(String s : numbers) {
+				listOfNumbers.add(toInt(s));
+			}
+			checkInputForIllegalNumbers(listOfNumbers);
+			return sumOfListOfIntegers(listOfNumbers);
 		}
 		else {
 			int number = toInt(text);
 			if (number < 0) {
-				throw new IllegalArgumentException("Negatives not allowed: " + number);
+				throw new IllegalArgumentException("Negatives not allowed: " + text);
 			}
 			return number;
 		}
 	}
 
-	private static void checkInputForIllegalNumbers(String [] numbers) {
+	private static void checkInputForIllegalNumbers(List<Integer> numbers) {
 		String negativeNumbers = "";
-		for(String s : numbers) {
-			if(toInt(s) < 0) {
-				negativeNumbers += s;
+		for(Integer i : numbers) {
+			if(i < 0) {
+				negativeNumbers += i.toString();
 				negativeNumbers += ",";
 			}
 		}
 		if(!negativeNumbers.isEmpty()) {
-			negativeNumbers = negativeNumbers.substring(0,negativeNumbers.length()-1);
+			negativeNumbers = negativeNumbers.substring(0, negativeNumbers.length()-1);
 			throw new IllegalArgumentException("Negatives not allowed: " + negativeNumbers);
 		}
 	}
 
-	private static int sumOfArray(String [] numbers) {
+	private static int sumOfListOfIntegers(List<Integer> numbers) {
 		int sum = 0;
-		for(String s : numbers) {
-			sum += toInt(s);
+		for(Integer i : numbers) {
+			sum += i;
 		}
 		return sum;
 	}

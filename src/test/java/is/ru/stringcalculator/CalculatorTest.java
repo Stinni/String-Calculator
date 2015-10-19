@@ -93,8 +93,8 @@ public class CalculatorTest {
 		assertEquals(120, Calculator.add("20000,1212,30\n4000,90"));
 	}
 
-	/*@Test
+	@Test
 	public void testAddWithLongerDelimiter1() {
 		assertEquals(34, Calculator.add("//[***]\n22***10***2"));
-	}*/
+	}
 }
